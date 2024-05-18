@@ -62,3 +62,10 @@ def booking():
 def makebooking():
     print(request.form)
     pass
+
+@app.route("/camperlist")
+def camperlist():
+    connection = getCursor()
+    connection.execute("SELECT * FROM customers;")
+    camperList = connection.fetchall()
+    return render_template("camperlist.html", camperlist = camperList)
