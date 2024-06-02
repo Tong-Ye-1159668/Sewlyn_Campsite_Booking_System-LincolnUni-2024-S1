@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Selwyn Campground - Add a New Customer</h2>
+<p>
+    <form action="/addcustomer" method="POST">
+        <p>First Name</p>
+        <input type="text" id="firstname" value="{{firstname}}"/>
+        <p>Last Name</p>
+        <input type="text" id="familyname" value="{{familyname}}"/>
+        <p>Email</p>
+        <input type="text" id="email" value="{{email}}"/>
+        <p>Phone</p>
+        <input type="text" id="phone" value="{{phone}}"/>
+        <p></p>
+        <button>Save</button>
+    </form>
+</p>
+
+{% endblock %}
