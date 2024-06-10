@@ -80,15 +80,21 @@ def addcustomer():
     if request.method == "GET":
         return render_template("addcustomer.html") 
     else:
-        cur = getCursor()
-        cur.execute('SELECT MAX(customer_id) FROM customers')
-        result = cur.fetchone()
+        connection = getCursor()
+        connection.execute('SELECT MAX(customer_id) FROM customers')
+        result = connection.fetchone()
         max_customer_id = result[0] if result[0] is not None else 0
         new_id = max_customer_id + 1
-        cur.execute('INSERT INTO customers (customer_id, firstname, familyname, email, phone) VALUES (%s,%s,%s,%s,%s);', (new_id, firstname, familyname, email, phone,))
+        connection.execute('INSERT INTO customers (customer_id, firstname, familyname, email, phone) VALUES (%s,%s,%s,%s,%s);', (new_id, firstname, familyname, email, phone,))
         return redirect("/allcamperlist")
 
-
-@app.route("/searchcustomer")
-def searchcustomer():
-    return render_template("customersearch.html")
+@app.route('/search',  methods=["GET","POST"])
+def search():
+    if request.method == "GET":
+        return render_template("search.html")
+    else:
+        search_Name = request.form['search_Name']
+        connection = getCursor()
+        connection.execute("SELECT * FROM customers WHERE firstname LIKE %s OR familyname LIKE %s;",('%' + search_Name + '%', '%' + search_Name + '%'))
+        resultList = connection.fetchall()
+        return render_template("search_results.html", resultlist=resultList, search_name=search_Name)
