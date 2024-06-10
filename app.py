@@ -138,3 +138,26 @@ def search():
         connection.execute("SELECT * FROM customers WHERE firstname LIKE %s OR familyname LIKE %s;",('%' + search_Name + '%', '%' + search_Name + '%'))
         resultList = connection.fetchall()
         return render_template("search_results.html", resultlist=resultList, search_name=search_Name)
+    
+@app.route('/edit_customer/<customer_id>', methods=["GET", "POST"])
+def edit_customer(customer_id):
+    if request.method == "GET":
+        connection = getCursor()
+        connection.execute("SELECT * FROM customers WHERE customer_id = %s", (customer_id,))
+        customerDetail = connection.fetchone()
+        return render_template('edit_customer.html', customerdetail=customerDetail)
+    elif request.method == "POST":
+        new_firstname = request.form['firstname']
+        new_familyname = request.form['familyname']
+        new_email = request.form['email']
+        new_phone = request.form['phone']
+
+        connection = getCursor()
+        query = """
+        UPDATE customers
+        SET firstname = %s, familyname = %s, email = %s, phone = %s
+        WHERE customer_id = %s
+        """
+        connection.execute(query, (new_firstname, new_familyname, new_email, new_phone, customer_id))
+
+        return redirect("/allcamperlist")
