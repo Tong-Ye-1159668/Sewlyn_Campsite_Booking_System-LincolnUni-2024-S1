@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Selwyn Campground - Search a Customer</h2>
+
+<p>
+    <form action="/search" method="post">
+        <div class="form-group">
+            <label for="search_name">Search Customer:</label>
+            <input type="text" class="form-control" placeholder="Please input customer's name" id="search_Name" name="search_Name" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+</p>
+
+{% endblock %}
