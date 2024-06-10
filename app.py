@@ -36,9 +36,20 @@ def campers():
     else:
         campDate = request.form.get('campdate')
         connection = getCursor()
-        connection.execute("SELECT booking_id, site, customer, booking_date, occupancy FROM bookings WHERE booking_date = %s",(campDate,))
+        query = ('''SELECT customers.customer_id, customers.firstname, customers.familyname, customers.email, customers.phone
+                    FROM bookings
+                    INNER JOIN customers ON bookings.customer = customers.customer_id
+                    WHERE bookings.booking_date = %s''')
+        connection.execute(query, (campDate,))
         camperList = connection.fetchall()
-        return render_template("camperresult.html", camperlist = camperList, campdate=campDate)
+        return render_template("camperlist.html", camperlist = camperList, campdate=campDate)
+    
+@app.route("/bookinglist", methods = ['GET'])
+def bookinglist():
+    connection = getCursor()
+    connection.execute("SELECT * FROM bookings;")
+    bookingList = connection.fetchall()
+    return render_template("currentbooking.html", bookinglist = bookingList)
 
 @app.route("/booking", methods=['GET','POST'])
 def booking():
@@ -58,10 +69,39 @@ def booking():
         siteList = connection.fetchall()
         return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights)    
 
+#@app.route("/booking/add", methods=['POST'])
+#def makebooking():
+    #print(request.form)
+    #customerid = request.form.get('customer')
+    #siteid = request.form.get('site')
+    #bookingdate = request.form.get('bookingdate')
+    #cur = getCursor()
+    #cur.execute("INSERT INTO bookings (customer, site, booking_date) VALUES(%s,%s,%s);",(customerid, siteid, str(bookingdate)))
+    #return redirect("/bookinglist")
+
 @app.route("/booking/add", methods=['POST'])
 def makebooking():
-    print(request.form)
-    pass
+    customer = request.form.get('customer')
+    site = request.form.get('site')
+    booking_date = request.form.get('bookingdate')
+    booking_nights = int(request.form.get('bookingnights'))
+    occupancy = request.form.get('occupancy')
+
+    first_night = date.fromisoformat(booking_date)
+    last_night = first_night + timedelta(days=booking_nights - 1)
+
+    connection = getCursor()
+    for n in range(booking_nights):
+        booking_day = first_night + timedelta(days=n)
+        query = """
+        INSERT INTO bookings (customer, site, booking_date, occupancy)
+        VALUES (%s, %s, %s, %s)
+        """
+        connection.execute(query, (customer, site, booking_day, occupancy))
+
+    return render_template('booking_confirmation.html', customer=customer, site=site, start_date=first_night, end_date=last_night, occupancy=occupancy)
+
+
 
 @app.route("/allcamperlist", methods = ['GET'])
 def allcamperlist():
