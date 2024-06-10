@@ -69,24 +69,16 @@ def booking():
         siteList = connection.fetchall()
         return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights)    
 
-#@app.route("/booking/add", methods=['POST'])
-#def makebooking():
-    #print(request.form)
-    #customerid = request.form.get('customer')
-    #siteid = request.form.get('site')
-    #bookingdate = request.form.get('bookingdate')
-    #cur = getCursor()
-    #cur.execute("INSERT INTO bookings (customer, site, booking_date) VALUES(%s,%s,%s);",(customerid, siteid, str(bookingdate)))
-    #return redirect("/bookinglist")
-
 @app.route("/booking/add", methods=['POST'])
 def makebooking():
     customer_id = request.form.get('customer')
     site_id = request.form.get('site')
     booking_date = request.form.get('bookingdate')
     booking_nights = request.form.get('bookingnights')
+    occupancy = request.form.get('occupancy')
 
     booking_nights = int(booking_nights)
+    occupancy = int(occupancy)
 
     first_night = date.fromisoformat(booking_date)
     
@@ -95,8 +87,8 @@ def makebooking():
     # Insert each night of the booking into the database
     for night in range(booking_nights):
         current_night = first_night + timedelta(days=night)
-        query = "INSERT INTO bookings (site, customer, booking_date) VALUES (%s, %s, %s)"
-        connection.execute(query, (site_id, customer_id, current_night))
+        query = "INSERT INTO bookings (site, customer, booking_date, occupancy) VALUES (%s, %s, %s, %s)"
+        connection.execute(query, (site_id, customer_id, current_night, occupancy))
 
     # Fetch customer details for confirmation
     connection = getCursor()
@@ -106,7 +98,7 @@ def makebooking():
     customer_name = f"{customer[0]} {customer[1]}"
     end_date = first_night + timedelta(days=booking_nights - 1)
 
-    return render_template("booking_confirmation.html", customer=customer_name, site=site_id, start_date=first_night, end_date=end_date)
+    return render_template("booking_confirmation.html", customer=customer_name, site=site_id, start_date=first_night, end_date=end_date, occupancy=occupancy)
 
 
 
