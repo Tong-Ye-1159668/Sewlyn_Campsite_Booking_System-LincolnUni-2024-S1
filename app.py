@@ -67,7 +67,7 @@ def booking():
         customerList = connection.fetchall()
         connection.execute("select * from sites where occupancy >= %s AND site_id not in (select site from bookings where booking_date between %s AND %s);",(occupancy,firstNight,lastNight))
         siteList = connection.fetchall()
-        return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights)    
+        return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights, occupancy = occupancy)    
 
 @app.route("/booking/add", methods=['POST'])
 def makebooking():
@@ -78,7 +78,6 @@ def makebooking():
     occupancy = request.form.get('occupancy')
 
     booking_nights = int(booking_nights)
-    occupancy = int(occupancy)
 
     first_night = date.fromisoformat(booking_date)
     
