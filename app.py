@@ -63,6 +63,32 @@ def makebooking():
     print(request.form)
     pass
 
-@app.route("/addcustomer")
+@app.route("/allcamperlist", methods = ['GET'])
+def allcamperlist():
+    connection = getCursor()
+    connection.execute("SELECT * FROM customers;")
+    allcamperList = connection.fetchall()
+    return render_template("allcamperlist.html", allcamperlist = allcamperList)
+
+@app.route("/addcustomer", methods=['GET', 'POST'])
 def addcustomer():
-    return render_template("addcustomer.html")
+    new_id = request.form.get('customer_id') 
+    firstname = request.form.get('firstname') 
+    familyname = request.form.get('familyname') 
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    if request.method == "GET":
+        return render_template("addcustomer.html") 
+    else:
+        cur = getCursor()
+        cur.execute('SELECT MAX(customer_id) FROM customers')
+        result = cur.fetchone()
+        max_customer_id = result[0] if result[0] is not None else 0
+        new_id = max_customer_id + 1
+        cur.execute('INSERT INTO customers (customer_id, firstname, familyname, email, phone) VALUES (%s,%s,%s,%s,%s);', (new_id, firstname, familyname, email, phone,))
+        return redirect("/allcamperlist")
+
+
+@app.route("/searchcustomer")
+def searchcustomer():
+    return render_template("customersearch.html")
