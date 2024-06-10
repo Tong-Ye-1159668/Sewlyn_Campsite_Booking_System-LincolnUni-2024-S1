@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit Customer Details</h2>
+
+<form action="{{ url_for('edit_customer', customer_id=customerdetail[0]) }}" method="POST">
+    <!-- firstname -->
+    <div class="col-md-4">
+        <label for="firstname" class="form-label">First name</label>
+        <input type="text" class="form-control" name="firstname" value="{{ customerdetail[1] }}">
+    </div>
+    <p></p>
+
+    <!-- familyname -->
+    <div class="col-md-4">
+        <label for="familyname" class="form-label">Family name</label>
+        <input type="text" class="form-control" name="familyname" value="{{ customerdetail[2] }}" required>
+    </div>
+    <p></p>
+    
+    <!-- email address -->
+    <div class="col-md-4">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" value="{{ customerdetail[3] }}">
+    </div>
+    <p></p>
+
+    <!-- phone number -->
+    <div class="col-md-4">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" name="phone" value="{{ customerdetail[4] }}" required>
+    </div>
+    <p></p>
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </div>
+</form>
+
+{% endblock %}
