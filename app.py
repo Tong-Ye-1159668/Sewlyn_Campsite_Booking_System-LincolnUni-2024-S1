@@ -36,9 +36,9 @@ def campers():
     else:
         campDate = request.form.get('campdate')
         connection = getCursor()
-        connection.execute("SELECT * FROM bookings join sites on site = site_id inner join customers on customer = customer_id where booking_date= %s;",(campDate,))
+        connection.execute("SELECT booking_id, site, customer, booking_date, occupancy FROM bookings WHERE booking_date = %s",(campDate,))
         camperList = connection.fetchall()
-        return render_template("datepickercamper.html", camperlist = camperList)
+        return render_template("camperresult.html", camperlist = camperList, campdate=campDate)
 
 @app.route("/booking", methods=['GET','POST'])
 def booking():
