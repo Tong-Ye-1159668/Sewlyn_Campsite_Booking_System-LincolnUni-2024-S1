@@ -3,17 +3,45 @@
 
 <h2>Selwyn Campground - Add a New Customer</h2>
 <p>
-    <form action="/addcustomer" method="POST">
-        <p>First Name</p>
-        <input type="text" id="firstname" value="{{firstname}}"/>
-        <p>Last Name</p>
-        <input type="text" id="familyname" value="{{familyname}}"/>
-        <p>Email</p>
-        <input type="text" id="email" value="{{email}}"/>
-        <p>Phone</p>
-        <input type="text" id="phone" value="{{phone}}"/>
+    <!-- code to add a customer-->
+    <form action="/addcustomer" method="POST" class="row needs-validation" novalidate>
+        <!-- firstname -->
+        <div class="col-md-4">
+            <label for="firstname" class="form-label">First name</label>
+            <input type="text" class="form-control" id="firstname" name="firstname">
+        </div>
         <p></p>
-        <button>Save</button>
+
+        <!-- familyname -->
+        <div class="col-md-4">
+            <label for="familyname" class="form-label">Family name</label>
+            <input type="text" class="form-control" id="familyname" name="familyname" required>
+            <div class="invalid-feedback">
+                Please input a family name.
+            </div>
+        </div>
+        <p></p>
+        
+        <!-- email address -->
+        <div class="col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <p></p>
+
+        <!-- phone number -->
+        <div class="col-md-4">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+            <div class="invalid-feedback">
+                Please input a phone number.
+            </div>
+        </div>
+        <p></p>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Add Customer</button>
+          </div>
     </form>
 </p>
 
