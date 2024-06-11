@@ -7,13 +7,16 @@
 
 <!-- Display a table for the search result -->
 <table class="table table-hover">
-    <tr>
-        <th>Customer ID</th>
-        <th>Customer Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Edit</th>
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Edit</th>
+            <th>Show Summary Report</th>
     </tr>
+    </thead>
     {% for result in resultlist %}
         <tr>
             <td>{{result[0]}}</td>
@@ -23,7 +26,10 @@
             <!-- Add an Edit button for each result-->
             <td>
                 <a href="{{ url_for('edit_customer', customer_id=result[0]) }}" class="btn btn-primary">Edit</a>
-            </td> 
+            </td>
+            <td>
+                <a href="{{ url_for('customer_report', customer_id=result[0]) }}" class="btn btn-primary">Show Summary Report</a>
+            </td>
         </tr>
 
     {% endfor %}

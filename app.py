@@ -38,24 +38,14 @@ def campers():
         campDate = request.form.get('campdate')
         connection = getCursor()
 
-        # Query to retrieve camper information for the particular date
-        query = ('''SELECT customers.customer_id, customers.firstname, customers.familyname, customers.email, customers.phone
-                    FROM bookings
-                    INNER JOIN customers ON bookings.customer = customers.customer_id
-                    WHERE bookings.booking_date = %s''')
-        connection.execute(query, (campDate,))
+        # Retrieve camper information for the particular date
+        connection.execute('''SELECT customers.customer_id, customers.firstname, customers.familyname, customers.email, customers.phone, bookings.booking_id
+                            FROM bookings INNER JOIN customers ON bookings.customer = customers.customer_id
+                            WHERE bookings.booking_date = %s''', (campDate,))
         camperList = connection.fetchall()
 
         # Render the camper list with the particular camp date
         return render_template("camperlist.html", camperlist = camperList, campdate=campDate)
-    
-@app.route("/bookinglist", methods = ['GET'])
-def bookinglist():
-    connection = getCursor()
-    connection.execute("SELECT * FROM bookings;")
-    bookingList = connection.fetchall()
-    return render_template("currentbooking.html", bookinglist = bookingList)
-
 
 # Display a booking form to book a site
 @app.route("/booking", methods=['GET','POST'])
@@ -100,8 +90,7 @@ def makebooking():
     # Insert each night of the booking into the database
     for night in range(bookingnights):
         current_night = firstNight + timedelta(days=night)
-        query = "INSERT INTO bookings (site, customer, booking_date, occupancy) VALUES (%s, %s, %s, %s)"
-        connection.execute(query, (siteId, customerId, current_night, occupancy))
+        connection.execute("INSERT INTO bookings (site, customer, booking_date, occupancy) VALUES (%s, %s, %s, %s)", (siteId, customerId, current_night, occupancy))
 
     # Fetch customer details for confirmation
     connection = getCursor()
@@ -114,7 +103,7 @@ def makebooking():
     lastNight = firstNight + timedelta(days=bookingnights)
 
     # Render the booking confirmation page with the booking details
-    return render_template("booking_confirmation.html", customername=customerName, siteid=siteId, firstnight=firstNight, lastnight=lastNight, occupancy=occupancy)
+    return render_template("booking_confirmation.html", customername=customerName, siteid=siteId, firstnight=firstNight, lastnight=lastNight, bookingnights=bookingNights, occupancy=occupancy)
 
 
 # Display a list of all campers
@@ -188,3 +177,29 @@ def edit_customer(customer_id):
 
         # Redirect to the list of all campers after updating the customer details
         return redirect("/allcamperlist")
+    
+#customer report
+@app.route('/customer_report/<int:customer_id>', methods=['GET'])
+def customer_report(customer_id):
+    connection = getCursor()
+
+    # Retrieve customer first name and family name
+    connection.execute("SELECT firstname, familyname FROM customers WHERE customer_id = %s", (customer_id,))
+    customerName = connection.fetchone()
+
+    # Retrieve total booking nights of the customer
+    connection.execute("SELECT COUNT(*) FROM bookings WHERE customer = %s", (customer_id,))
+    totalNights = connection.fetchone()
+
+    # Calculate average occupancy for the customer 
+    connection.execute("SELECT AVG(occupancy) FROM bookings WHERE customer = %s", (customer_id,))
+    avgOccupancy = connection.fetchone()
+
+    return render_template("customer_report.html", firstname=customerName[0], familyname=customerName[1], totalnights=totalNights[0], avgoccupancy=avgOccupancy[0])
+
+@app.route('/booking/delete/<int:booking_id>', methods=['POST'])
+def delete_booking(booking_id):
+    connection = getCursor()
+    connection.execute("DELETE FROM bookings WHERE booking_id = %s", (booking_id,))
+    connection.close()
+    return redirect(url_for('campers'))  # Redirect to the camper list page after deletion  

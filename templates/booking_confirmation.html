@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Booking Confirmation{% endblock %}
 {% block content %}
+
 <!-- code in here to display the added booking details-->   
 
 <h1>This booking has been successfully added.</h1>
@@ -21,6 +21,10 @@
     <tr>
         <th>Check-out Date</th>
         <td>{{ lastnight }}</td>
+    </tr>
+    <tr>
+        <th>Number of Nights</th>
+        <td>{{ bookingnights }}</td>
     </tr>
     <tr>
         <th>Occupancy</th>

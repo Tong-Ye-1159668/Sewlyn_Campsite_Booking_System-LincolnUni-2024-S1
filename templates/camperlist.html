@@ -4,7 +4,19 @@
 <!-- Insert code to loop over the list of campers and display them -->
 <h3>A list of all customers on {{ campdate }} in Sewlyn Campground</h3>
 <table class="table table-hover">
-    <tr><th>Customer ID</th><th>First Name</th><th>Family Name</th><th>Email</th><th>Phone</th></tr>
+    <!-- Table header -->
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Family Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Delete Booking</th>
+        
+        </tr>
+    </thead>
+    <!-- Table body -->
     {% for camper in camperlist %}
         <tr>
             <td>{{camper[0]}}</td>
@@ -12,6 +24,11 @@
             <td>{{camper[2]}}</td>
             <td>{{camper[3]}}</td>
             <td>{{camper[4]}}</td>
+            <td>
+                <form action="{{ url_for('delete_booking', booking_id=camper[5]) }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
     {% endfor %}
 </table>
