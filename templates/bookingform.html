@@ -3,7 +3,8 @@
 <!-- code in here to booking form-->
 <p ></p>
 <h2>Selwyn Campground - Make a booking</h2>
-<p>
+
+{% if sitelist %}
 <form action="/booking/add" method="POST" class="needs-validation" novalidate>
     <!-- Show the selected date -->
     <div class="col-md-4">
@@ -47,5 +48,13 @@
         <button class="btn btn-primary" type="submit">Submit</button>
     </div>
 </form>
+
+{% else %}
+<br>
+<p class="text-warning bg-dark">No campsite is available.</p>
+{% endif %}
+
+<br>
+<a href="{{ url_for('booking') }}">Back to Select other date</a>
 
 {% endblock %}
