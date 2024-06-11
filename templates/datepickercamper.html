@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- code in here to display a list of campers of selected date-->
-<p ></p>
+<br>
 <h2>Selwyn Campground - Who is camping?</h2>
-<p ></p>
+<br>
 <h3>Choose the date you'd like view who is camping.</h3>
-
+<br>
 <!-- Form to select the date to check customer list -->
 <form action="{{url_for('campers')}}" method="POST">
 <input type="date" value="{{currentdate}}" name="campdate"/>
