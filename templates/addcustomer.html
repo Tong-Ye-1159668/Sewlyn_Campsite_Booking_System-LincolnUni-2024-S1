@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
+<p ></p>
 <h2>Selwyn Campground - Add a New Customer</h2>
 <p>
     <!-- code to add a customer-->
     <form action="/addcustomer" method="POST" class="row needs-validation" novalidate>
-        <!-- firstname -->
+        <!-- first name input field-->
         <div class="col-md-4">
             <label for="firstname" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstname" name="firstname">
+            <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <div class="invalid-feedback">
+                Please input a first name.
+            </div>
         </div>
         <p></p>
 
-        <!-- familyname -->
+        <!-- family name input field-->
         <div class="col-md-4">
             <label for="familyname" class="form-label">Family name</label>
             <input type="text" class="form-control" id="familyname" name="familyname" required>
@@ -22,14 +26,17 @@
         </div>
         <p></p>
         
-        <!-- email address -->
+        <!-- email address input field-->
         <div class="col-md-4">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email">
+            <div class="valid-feedback">
+                You can leave email blank.
+            </div>
         </div>
         <p></p>
 
-        <!-- phone number -->
+        <!-- phone number input field-->
         <div class="col-md-4">
             <label for="phone" class="form-label">Phone</label>
             <input type="text" class="form-control" id="phone" name="phone" required>
@@ -39,6 +46,7 @@
         </div>
         <p></p>
 
+        <!-- Add customer button -->
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Add Customer</button>
           </div>

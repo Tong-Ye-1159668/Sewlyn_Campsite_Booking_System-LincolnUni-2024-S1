@@ -1,37 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 
+<p ></p>
 <h2>Edit Customer Details</h2>
 
-<form action="{{ url_for('edit_customer', customer_id=customerdetail[0]) }}" method="POST">
-    <!-- firstname -->
+<form action="{{ url_for('edit_customer', customer_id=customerdetail[0]) }}" method="POST" class="row needs-validation" novalidate>
+    <!-- firstname edit field-->
     <div class="col-md-4">
         <label for="firstname" class="form-label">First name</label>
-        <input type="text" class="form-control" name="firstname" value="{{ customerdetail[1] }}">
+        <input type="text" class="form-control" name="firstname" value="{{ customerdetail[1] }}" required>
+        <div class="invalid-feedback">
+            Please input a first name.
+        </div>
     </div>
     <p></p>
 
-    <!-- familyname -->
+    <!-- familyname edit field-->
     <div class="col-md-4">
         <label for="familyname" class="form-label">Family name</label>
         <input type="text" class="form-control" name="familyname" value="{{ customerdetail[2] }}" required>
+        <div class="invalid-feedback">
+            Please input a family name.
+        </div>
     </div>
     <p></p>
     
-    <!-- email address -->
+    <!-- email address edit field-->
     <div class="col-md-4">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" name="email" value="{{ customerdetail[3] }}">
+        <div class="valid-feedback">
+            You can leave email blank.
+        </div>
     </div>
     <p></p>
 
-    <!-- phone number -->
+    <!-- phone number edit field-->
     <div class="col-md-4">
         <label for="phone" class="form-label">Phone</label>
         <input type="text" class="form-control" name="phone" value="{{ customerdetail[4] }}" required>
+        <div class="invalid-feedback">
+            Please input a phone number.
+        </div>
     </div>
     <p></p>
 
+    <!-- Save changes button -->
     <div class="col-12">
         <button class="btn btn-primary" type="submit">Save Changes</button>
     </div>

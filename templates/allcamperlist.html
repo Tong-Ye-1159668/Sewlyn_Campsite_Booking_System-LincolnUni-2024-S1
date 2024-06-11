@@ -2,8 +2,7 @@
 {% block content %}
 <h2>Selwyn Campground - Camper List</h2>
 
-<!-- Insert code to loop over the list of campers and display them -->
-
+<!--show all camperlist after adding a new customer-->
 <table class="table table-hover">
     <tr><th>Customer ID</th><th>First Name</th><th>Family Name</th><th>Email</th><th>Phone</th><th>Edit</th>
     {% for camper in allcamperlist %}
@@ -13,9 +12,11 @@
             <td>{{camper[2]}}</td>
             <td>{{camper[3]}}</td>
             <td>{{camper[4]}}</td>
+
+            <!-- Add an Edit button for each customer -->
             <td>
                 <a href="{{ url_for('edit_customer', customer_id=camper[0]) }}" class="btn btn-primary">Edit</a>
-            </td> <!-- Add an Edit button -->
+            </td>
         </tr>
     {% endfor %}
 </table>

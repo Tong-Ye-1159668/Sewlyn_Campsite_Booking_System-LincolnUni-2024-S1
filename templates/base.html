@@ -10,20 +10,26 @@
 
     <body>
         <nav>
-            <h1>Selwyn Campground</h1>
+          <p></p>
+          <h1>Selwyn Campground</h1>
             <ul class="nav nav-tabs">
+              <!-- Add Booking nav tab -->
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('booking') }}">Add Booking</a>
               </li>
+              <!-- List campers nav tab -->
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('campers') }}">Show Who is Camping on Selected Dates</a>
               </li>
+              <!-- Customer add nav tab -->
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('addcustomer') }}">Add a New Customer</a>
               </li>
+              <!--Customer search nav tab -->
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('search') }}">Search Customer</a>
               </li>
+
             </ul>
           </nav>
           <section class="content">

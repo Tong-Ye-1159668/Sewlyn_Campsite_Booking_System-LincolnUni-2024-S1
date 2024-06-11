@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Search Results for "{{search_name}}"</h2>
+<!-- Display the heading with the entered name -->
+<p ></p>
+<h2>Search Results for "{{searchname}}"</h2>
 
+<!-- Display a table for the search result -->
 <table class="table table-hover">
     <tr>
         <th>Customer ID</th>
@@ -13,19 +16,20 @@
     </tr>
     {% for result in resultlist %}
         <tr>
-            
-                <td>{{result[0]}}</td>
-                <td>{{result[1]}} {{result[2]}}</td>
-                <td>{{result[3]}}</td>
-                <td>{{result[4]}}</td>
-                <td>
-                    <a href="{{ url_for('edit_customer', customer_id=result[0]) }}" class="btn btn-primary">Edit</a>
-                </td> <!-- Add an Edit button -->
+            <td>{{result[0]}}</td>
+            <td>{{result[1]}} {{result[2]}}</td>
+            <td>{{result[3]}}</td>
+            <td>{{result[4]}}</td>
+            <!-- Add an Edit button for each result-->
+            <td>
+                <a href="{{ url_for('edit_customer', customer_id=result[0]) }}" class="btn btn-primary">Edit</a>
+            </td> 
         </tr>
 
     {% endfor %}
 </table>
 
-    <a href="{{ url_for('search') }}">Back to Search</a>
+<!-- Add a link to go back to the search page -->
+ <a href="{{ url_for('search') }}">Back to Search</a>
 
 {% endblock %}

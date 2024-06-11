@@ -1,18 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- code in here to display a list of books-->
+<!-- code in here to make a booking-->
+ <p ></p>
 <h2>Selwyn Campground - Make a booking</h2>
+<p ></p>
+
 <h3>Choose the date you'd like the booking to start on.</h3>
 
-<form action="{{url_for('booking')}}" method="POST">
-<label for="bookingdate">Choose start night of booking</label>
-<input type="date" min="{{currentdate}}" name="bookingdate"/>
-<label for="bookingnights">Number of nights</label>
-<input type="number" name="bookingnights" min="1" max="5" step="1" value="1"/>
-<label for="occupancy">Number of people</label>
-<input type="number" name="occupancy" min="1" max="8" step="1" value="1"/>
+<!-- Form to select the date to start the booking -->
+<form action="{{url_for('booking')}}" method="POST" class="needs-validation" novalidate>
+    <div class="col-md-4">
+        <label for="bookingdate" class="form-label">Choose start night of booking</label>
+        <input type="date" min="{{currentdate}}" name="bookingdate" required/>
+        <div class="invalid-feedback">
+            Please choose a date.
+        </div>
+    </div>
 
-<input type="submit"/>
+    <!--Form to select how many nights for the booking-->
+    <div class="col-md-4">
+        <label for="bookingnights" class="form-label">Number of nights</label>
+        <select name="bookingnights" id="bookingnights" class="form-select" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    
+    <!--Form to select the number of people for the booking-->
+    <div class="col-md-4">
+        <label for="occupancy" class="form-label">Number of people</label>
+        <select name="occupancy" id="occupancy" class="form-select" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+    </div>
+    
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    
 </form>
 
 {% endblock %}

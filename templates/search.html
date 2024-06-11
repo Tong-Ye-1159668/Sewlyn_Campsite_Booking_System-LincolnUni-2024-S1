@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
+<p ></p>
 <h2>Selwyn Campground - Search a Customer</h2>
 
+<!-- code to search a customer -->
 <p>
-    <form action="/search" method="post">
-        <div class="form-group">
-            <label for="search_name">Search Customer:</label>
-            <input type="text" class="form-control" placeholder="Please input customer's name" id="search_Name" name="search_Name" required>
+    <form action="/search" method="POST" class="row needs-validation" novalidate>
+        <!-- name input field-->
+        <div class="col-md-4">
+            <label for="searchname" class="form-label">Search Customer:</label>
+            <input type="text" class="form-control" placeholder="Please input customer's name" id="searchName" name="searchName" required>
+            <div class="invalid-feedback">
+                Please input a name to search.
+            </div>
         </div>
+        <p></p>
+
+        <!-- search button-->
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
