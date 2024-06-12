@@ -46,7 +46,15 @@ The displayed list uses the **Bootstrap's table-hover** styling, making the disp
 
 Placing a **delete button** next to **each customer list** enables users to quickly and directly delete a specific booking without having to navigate to a separate page. This streamlined approach improves the efficiency of booking management tasks.
 
+### Customer -add
 
+In the customer adding form (***addcustomer.html***), I used **Bootstrap's form validation**. **Except for the email**, the **first name, family name and phone** are all **required** to be entered, and **invalid feedback** is provided. In the email column, I provided valid feedback to remind users that they can not enter an email. The reason for this design is because **some users (especially the elderly) may not have an email address**. 
+
+Although the database allows the first name to be null, I still set the first name to be required so that when the customer does not provide a first name, the admin can enter other information to indicate it.
+
+After completing the input of the customer information, you will be redirected to a page of **a list of all customers**. This design has several advantages. Redirecting to the whole customer list page provides users with immediate visual confirmation. **Seeing the new customer listed among all other customers reassures them that their action was successful**. Users can easily verify the details of the newly added customer without navigating away from the form. This minimizes the number of steps users need to take to see their input reflected in the system. If there was an error in adding the customer, the user will see it on the list page. This can prompt them to correct any mistakes promptly. **There is an "edit" button for each customer on the whole customer list for users to correct the mistakes promptly.** 
+
+Customer information is displayed **from newest to oldest based on customer ID**, which helps users to **immediately locate newly added customers**.
 
 
 
