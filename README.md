@@ -34,7 +34,7 @@ After submitting the booking form, **a booking confirmation page** will be displ
 
 ### List campers
 
-This function includes *@app.route("/camper", methods=['GET','POST'])*, with templates *datepickercamper.html*, *camperlist.html*.
+This function includes *@app.route("/camper", methods=['GET','POST'])*, methods=['POST']), with templates *datepickercamper.html*, *camperlist.html*.
 
 ***"/camper"*** route handles both **GET** and **POST** requests. By using a single route to handle both types of requests, the application can keep its routing structure simple and consistent. When accessed via the **GET** method, it renders the ***datepickercamper.html*** template, allowing users to select a specific date. On submitting the form, a **POST** request is sent to the same route *(/camper)* and it renders the ***camperlist.html*** template, allowing users to see all the campers on a particular date and delete bookings.
 
@@ -44,9 +44,11 @@ On the ***camperlist.html*** page, I **added the selected date to the title**, m
 
 The displayed list uses the **Bootstrap's table-hover** styling, making the displayed list neater and more visually appealing.
 
-Placing a **delete button** next to **each customer list** enables users to quickly and directly delete a specific booking without having to navigate to a separate page. This streamlined approach improves the efficiency of booking management tasks.
+Placing a **delete button** next to **each customer list** enables users to quickly and directly delete a specific booking without having to navigate to a separate page. This streamlined approach improves the efficiency of booking management tasks. This will redirect to route "/booking/delete/int:booking_id" with method "POST".
 
 ### Customer -add
+
+This function includes *@app.route("/addcustomer", methods=['GET','POST'])* and *@app.route("/allcamperlist", methods=['GET'])*, with templates *addcustomer.html*, *allcamperlist.html*.
 
 In the customer adding form (***addcustomer.html***), I used **Bootstrap's form validation**. **Except for the email**, the **first name, family name and phone** are all **required** to be entered, and **invalid feedback** is provided. In the email column, I provided valid feedback to remind users that they can not enter an email. The reason for this design is because **some users (especially the elderly) may not have an email address**. 
 
@@ -56,11 +58,34 @@ After completing the input of the customer information, you will be redirected t
 
 Customer information is displayed **from newest to oldest based on customer ID**, which helps users to **immediately locate newly added customers**.
 
+### Customer -search
+
+This function includes *@app.route("/search", methods=['GET','POST'])*, with templates *search.html*, *search_results.html*.
+
+The title **"Selwyn Campground - Search a Customer to Edit or Show a Report"** at route ***"/search"*** indicates that what the user can do after searching for a customer.
+
+The search bar uses **Bootstrap's form validation**. I set it to **required** and provided **invalid-feedback** to ensure that users must enter information to search.
+
+The search results page will redirect to a template ***"search_results.html"***. On this page, I show **what the user just entered in the title**, so that users can more intuitively see what information they entered for the search on the search results page.
+
+For each customer list that matches the search results, I provide an **"edit"** button and a **"Show Summary Report"** button to facilitate users to **operate on a specific customer individually**.
 
 
-### Styling
+### Customer -edit
 
-The selections of **number of nights** and **number of people** are changed to **Bootstrap CSS "select"** to make the interface look more user-friendly.
+This function includes *@app.route('/edit_customer/customer_id', methods=["GET", "POST"])*, with templates *edit_customer.html*.
+
+
+
+### Summary Report
+
+This function includes *@app.route('/customer_report/int:customer_id', methods=['GET'])*, with templates *customer_report.html*.
+
+
+### Navigation and Styling
+
+
+
 
 
 ## Project Report – Part 2: Answer Database Question
