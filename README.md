@@ -32,7 +32,19 @@ I also added a **conditional statement** in *bookingform.html*. If there is no s
 
 After submitting the booking form, **a booking confirmation page** will be displayed through *booking_confirmation.html*. This page shows the name, site, check-in date, check-out date, number of days, and number of people. The page uses **Bootstrap's "table-success table-striped" styling** to make the displayed information neat and concise.
 
+### List campers
 
+This function includes *@app.route("/camper", methods=['GET','POST'])*, with templates *datepickercamper.html*, *camperlist.html*.
+
+***"/camper"*** route handles both **GET** and **POST** requests. By using a single route to handle both types of requests, the application can keep its routing structure simple and consistent. When accessed via the **GET** method, it renders the ***datepickercamper.html*** template, allowing users to select a specific date. On submitting the form, a **POST** request is sent to the same route *(/camper)* and it renders the ***camperlist.html*** template, allowing users to see all the campers on a particular date and delete bookings.
+
+Displaying a **camper list** in a **separate template** has several benefits. Keeping the camper list display logic in its own template improves code clarity and readability. Developers can easily find and understand the code responsible for rendering the camper list. Using a separate camper list template makes it easier to make changes or updates to the camper list interface without affecting other parts of the application.
+
+On the ***camperlist.html*** page, I **added the selected date to the title**, making it easy for users to know which day the list displayed is for.
+
+The displayed list uses the **Bootstrap's table-hover** styling, making the displayed list neater and more visually appealing.
+
+Placing a **delete button** next to **each customer list** enables users to quickly and directly delete a specific booking without having to navigate to a separate page. This streamlined approach improves the efficiency of booking management tasks.
 
 
 
