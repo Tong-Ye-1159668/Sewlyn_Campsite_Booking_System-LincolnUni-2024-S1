@@ -1,6 +1,18 @@
-# scg
+# SCG Project Report - Tong Ye 1159668
 
-### Project Report – Part 2: Answer Database Question
+## Project Report – Part 1:Design Decisions
+
+### Home page
+
+I used Bootstrap containers for the home page,  *div class="container"*. This is to introduce a responsive, fixed-width layout that provides consistent margins on both sides of the page. This ensures that the content is not overly stretched across large screens, which will make it difficult to read and visually unsightly. With these margins, the layout looks more structured, making the interface easier to navigate.
+
+I used Bootstrap navigation components, *ul class="nav nav-tabs"*. This makes a structured, visually appealing, and user-friendly tabbed navigation interface. Background and foreground colours have a sufficient contrast ratio, which makes it easy for most users to read.
+
+### Add Booking
+
+
+
+## Project Report – Part 2: Answer Database Question
 #### 1. What SQL statement creates the customer table and defines its fields/columns?
 
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -66,16 +78,16 @@ I will add a new column to the **bookings** table. The new column should store b
 
 
 ALTER TABLE `bookings`
+
 ADD COLUMN `added_datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 
 #### 5. Suppose the ability for customers to make their own bookings was added. Describe two different changes that would be needed to the data model to implement this. 
 
-The first change is to add a table called “users” to store their username, password, and user information (first name, family name, phone, email, and corresponding customer_id). Users can log in to their accounts to make a booking or modify their personal information. The customer_id does not need to be displayed and cannot be modified by the user. It is only used to track the corresponding information of the customers table.
+The first change is to add a new table called **"users"** to store their username, password, and user information (first name, family name, phone, email, and corresponding customer_id). Users can log in to their accounts to make a booking or modify their personal information. The customer_id does not need to be displayed and cannot be modified by the user. It is only used to track the corresponding information of the customers table.
   
 Because usernames and passwords are involved, a login and authentication system needs to be implemented to verify users before allowing them to make bookings or modify their personal information. 
 
 
-The second change is to add two columns to the “bookings” table. The first column is “added_by”. “added_by” references the foreign key customer_id in the customers table, which allows administrators to track which user made the booking. The second column is “status”, which is a string data type, including "pending" and "confirmed". All reservations created by users themselves will enter the pending state and will need to be confirmed by the administrator. There is no need to add "canceled". If a user needs to cancel a booking, he/she needs to contact the administrator directly by phone or email, and then the administrator will cancel it directly in the admin system (this will delete the corresponding row in the bookings table).
-
+The second change is to add two new columns to the **“bookings”** table. The first column is **“added_by”**. **“added_by”** references the foreign key customer_id in the customers table, which allows administrators to track which user made the booking. The second column is **“status”**, which is a string data type, including "pending" and "confirmed". All reservations created by users themselves will enter the pending state and will need to be confirmed by the administrator. There is no need to add "canceled". If a user needs to cancel a booking, he/she needs to contact the administrator directly by phone or email, and then the administrator will cancel it directly in the admin system (this will delete the corresponding row in the bookings table).
 
