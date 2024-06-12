@@ -62,28 +62,48 @@ Customer information is displayed **from newest to oldest based on customer ID**
 
 This function includes *@app.route("/search", methods=['GET','POST'])*, with templates *search.html*, *search_results.html*.
 
-The title **"Selwyn Campground - Search a Customer to Edit or Show a Report"** at route ***"/search"*** indicates that what the user can do after searching for a customer.
+The title **"Selwyn Campground - Search a Customer to Edit or Show a Report"** at route ***"/search"*** indicates that what the user can do after searching a customer.
 
 The search bar uses **Bootstrap's form validation**. I set it to **required** and provided **invalid-feedback** to ensure that users must enter information to search.
 
-The search results page will redirect to a template ***"search_results.html"***. On this page, I show **what the user just entered in the title**, so that users can more intuitively see what information they entered for the search on the search results page.
+The search results page will redirect to a template ***"search_results.html"***. In this page, I show **what the user just entered in the title**, so that users can more intuitively see what information they entered for the search on the search results page.
 
-For each customer list that matches the search results, I provide an **"edit"** button and a **"Show Summary Report"** button to facilitate users to **operate on a specific customer individually**.
+For each customer list that matches the search results, I provide an **"edit"** button and a **"Show Smmary Report"** button to facilitate users to **operate on a specific customer individually**.
 
 
 ### Customer -edit
 
 This function includes *@app.route('/edit_customer/customer_id', methods=["GET", "POST"])*, with templates *edit_customer.html*.
 
+In the editing user page, **each input box will display the existing customer information**. The reason for this design is that users do not need to remember or look up a customer’s current details. Pre-filling existing information saves time and effort, as the users only have to change the fields that need to be updated. This design reduces the cognitive load on users by minimizing the amount of information they need to recall or re-enter.
 
+**The customer editing function not placed separately in the navigation bar**, but implemented through the **edit** button after searching for customers or the whole customers list after adding customer information. 
+
+Here are the reasons for this design:
+
+The navigation bar is typically reserved for primary navigation and should not be cluttered with actions that are context-specific, like editing a customer. This helps keep the navigation bar clean and focused on the main sections of the application.
+
+When users see the **edit button next to a customer's information**, it is **immediately clear which customer they are editing**. This reduces confusion and ensures that users are making changes to the correct record.
+
+Keeping related actions (viewing, editing) together minimizes the cognitive load on the user. They don't have to remember where to find the edit function; it’s right where they expect it to be, next to the customer information.
+
+When editing is integrated directly with the customer list, the risk of errors is reduced. Users are less likely to mistakenly edit the wrong customer because they see the customer's details right next to the edit button.
 
 ### Summary Report
 
 This function includes *@app.route('/customer_report/int:customer_id', methods=['GET'])*, with templates *customer_report.html*.
 
+Similarly, **the customer report function is not placed separately in the navigation bar**, but implemented through the **Show Summary Report** button after searching for customers. The reason for this design is the same as the one of the customer edit.
+
+The customer summary report page will redirect to a template ***"customer_report.html"***. On this page, I show **the customer's full name** at the title so that users can more intuitively see which customer the summary report is for.
 
 ### Navigation and Styling
 
+Most of the tables on the website use **Bootstrap's table-hover** styling. Table hover styles provide users with visual feedback as they interact with a list by highlighting rows when they hover over them. This interactive behaviour improves the overall user experience by making the interface more responsive and engaging. Users can quickly identify and focus on individual rows in a list, which is particularly helpful when browsing large data sets or looking for specific information.
+
+Most buttons (for example, submit, edit, save changes) use the **btn-primary button** styling. **Delete** button uses the **btn-danger** style, and **Show Summary Report** uses the **btn-info style**. This design helps users distinguish. 
+
+Navigation links are added at the bottom of most pages to help users return to the previous page to re-operations.
 
 
 
