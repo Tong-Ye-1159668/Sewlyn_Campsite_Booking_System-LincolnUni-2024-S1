@@ -47,7 +47,7 @@ def campers():
         # Render the camper list with the particular camp date
         return render_template("camperlist.html", camperlist = camperList, campdate=campDate)
 
-# Display a booking form to book a site
+# Add Booking - Display a booking form to choose date, nights, occupancy.
 @app.route("/booking", methods=['GET','POST'])
 def booking():
     if request.method == "GET":
@@ -62,7 +62,8 @@ def booking():
         lastNight = firstNight + timedelta(days=int(bookingNights))
 
         connection = getCursor()
-        connection.execute("SELECT * FROM customers;")
+        # Query to retrieve all customers order by name in the database
+        connection.execute("SELECT * FROM customers ORDER BY firstname, familyname;")
         customerList = connection.fetchall()
 
         # Query to retrieve available sites for the specified occupancy and date range
@@ -73,7 +74,7 @@ def booking():
         return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights, occupancy = occupancy)    
 
 
-# Add a booking to the database
+# Add Booking - Display a booking form to choose customer and site and submit to display booking confirmation.
 @app.route("/booking/add", methods=['POST'])
 def makebooking():
     customerId = request.form.get('customer')
