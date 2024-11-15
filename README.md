@@ -23,7 +23,7 @@ It reflects my ability to design, build, and deploy a web application from the g
 
 ---
 
-# The following part is for assessment.
+# The Following Part is for the Examiners Evaluation at Lincoln University
 
 # Project Report - Tong Ye 1159668
 
