@@ -1,3 +1,30 @@
+# Selwyn Campground Management System
+
+This repository contains my **first web application**, developed during Semester 1 of my Master of Applied Computing studies at Lincoln University. The project was part of the COMP 636: Web App Assessment and demonstrates foundational full-stack web development skills.
+
+## Features
+- **Customer Management**: Add, edit, and search customer details with form validation.
+- **Booking Management**: Record and manage campsite bookings efficiently.
+- **Campers List**: Display a well-formatted list of campers for a selected night using Bootstrap.
+- **Reports**: Generate summaries, including customer booking history and average occupancy.
+
+## Technical Details
+- **Technologies Used**: Python (Flask), MySQL, Bootstrap.
+- **Hosting**: Deployed on PythonAnywhere.
+- **Database Integration**: Secure and structured interaction with a MySQL database using parameterized queries.
+
+## Purpose
+This project marked the beginning of my journey into web development, showcasing:
+- Backend development using Flask and MySQL.
+- Designing user-friendly, responsive interfaces with Bootstrap.
+- Implementing data-driven functionalities with a focus on usability and scalability.
+
+It reflects my ability to design, build, and deploy a web application from the ground up while integrating best practices in software development.
+
+---
+
+# The following part is for assessment.
+
 # Project Report - Tong Ye 1159668
 
 ## Project Report – Part 1:Design Decisions
