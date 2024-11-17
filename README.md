@@ -1,4 +1,5 @@
-# Selwyn Campground Management System -Submitted on 12 June 2024
+# Selwyn Campground Management System
+#### Submitted on 12 June 2024
 
 This repository contains my **first web application**, developed during Semester 1 of my Master of Applied Computing studies at Lincoln University. The project was part of the COMP 636: Web App Assessment and demonstrates foundational full-stack web development skills.
 
